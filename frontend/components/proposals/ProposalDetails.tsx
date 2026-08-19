@@ -1,5 +1,24 @@
+import { Fragment } from "react";
+
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ReviewProposal } from "@/types";
+
+const COMPANY_NAMES = ["Al Merak Tax Consultant L.L.C", "شركة المرك للاستشارات الضريبية ذ.م.م"];
+const COMPANY_NAME_PATTERN = new RegExp(`(${COMPANY_NAMES.map((n) => n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|")})`, "g");
+
+/** Bolds every mention of the company name (English or Arabic) so it stands out in the legal text. */
+function withCompanyNameBold(text: string) {
+  const parts = text.split(COMPANY_NAME_PATTERN);
+  return parts.map((part, i) =>
+    COMPANY_NAMES.includes(part) ? (
+      <strong key={i} className="font-semibold text-gray-900">
+        {part}
+      </strong>
+    ) : (
+      <Fragment key={i}>{part}</Fragment>
+    )
+  );
+}
 
 /** Renders the message body with "• " lines grouped into a checklist and the rest as
  * plain paragraphs, so legal/declaration text reads as a scannable document instead of
@@ -32,13 +51,13 @@ function MessageBody({ message }: { message: string }) {
                 <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-green-100 text-[11px] font-bold text-green-700">
                   ✓
                 </span>
-                <span>{item}</span>
+                <span>{withCompanyNameBold(item)}</span>
               </li>
             ))}
           </ul>
         ) : (
           <p key={i} className="text-sm leading-relaxed text-gray-700">
-            {block.lines.join(" ")}
+            {withCompanyNameBold(block.lines.join(" "))}
           </p>
         )
       )}

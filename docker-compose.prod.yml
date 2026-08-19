@@ -37,7 +37,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile.prod
       args:
-        NEXT_PUBLIC_API_URL: https://confirmation.qomunix.com
+        NEXT_PUBLIC_API_URL: https://confirmation.qomunix.com/api
     expose:
       - "3000"
     restart: unless-stopped

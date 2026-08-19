@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Set Up Your Account</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f5f7;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f5f7;padding:32px 0;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="480" cellpadding="0" cellspacing="0" style="background-color:#ffffff;border-radius:8px;overflow:hidden;">
+          <tr>
+            <td style="background-color:#111827;padding:24px 32px;">
+              <span style="color:#ffffff;font-size:20px;font-weight:bold;letter-spacing:0.5px;">AL MERAK</span>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:32px;">
+              <h2 style="margin:0 0 16px;color:#111827;font-size:18px;">Hello {{ name }},</h2>
+              <p style="margin:0 0 16px;color:#374151;font-size:14px;line-height:1.6;">
+                An account has been created for <strong>{{ company_name }}</strong> on the Al Merak Review &amp; Approval Portal.
+              </p>
+              <p style="margin:0 0 24px;color:#374151;font-size:14px;line-height:1.6;">
+                Set up your password to activate your account:
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td style="border-radius:6px;background-color:#111827;">
+                    <a href="{{ setup_url }}" style="display:inline-block;padding:12px 28px;color:#ffffff;font-size:14px;font-weight:bold;text-decoration:none;">
+                      Set Up Password
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:24px 0 0;color:#374151;font-size:14px;line-height:1.6;">
+                Once set, you can log in anytime to review and act on your proposals.
+              </p>
+              <p style="margin:24px 0 0;color:#9ca3af;font-size:12px;word-break:break-all;">
+                Or copy this link: {{ setup_url }}
+              </p>
+              <p style="margin:32px 0 0;color:#111827;font-size:14px;">
+                Thank you,<br />Al Merak
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

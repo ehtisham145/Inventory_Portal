@@ -1,0 +1,10 @@
+-r base.txt
+
+# WSGI production server
+gunicorn==22.0.0
+
+# Serve Django static files efficiently without a separate web server
+whitenoise==6.8.2
+
+# Error tracking & performance monitoring
+sentry-sdk[django]==2.22.0

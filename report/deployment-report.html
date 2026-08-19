@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Al-Merak Confirmation & Approval Portal — Deployment Report</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: #1a1a2e;
+      background: #fff;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* ── Cover Page ── */
+    .cover {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
+      color: #fff;
+      text-align: center;
+      padding: 60px;
+      page-break-after: always;
+    }
+
+    .cover .logo-box {
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, #d4af37, #f5d060);
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px;
+      font-size: 40px;
+      font-weight: 900;
+      color: #1a1a2e;
+    }
+
+    .cover h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      color: #f5d060;
+    }
+
+    .cover h2 {
+      font-size: 18px;
+      font-weight: 400;
+      color: #c0c0d0;
+      margin-bottom: 50px;
+    }
+
+    .cover .meta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      width: 100%;
+      max-width: 500px;
+      margin-top: 40px;
+    }
+
+    .cover .meta-item {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .cover .meta-item .label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #d4af37;
+      margin-bottom: 4px;
+    }
+
+    .cover .meta-item .value {
+      font-size: 13px;
+      color: #eee;
+      font-weight: 500;
+    }
+
+    .cover .confidential {
+      margin-top: 50px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* ── Page Layout ── */
+    .page {
+      padding: 55px 65px;
+      page-break-after: always;
+      min-height: 100vh;
+    }
+
+    .page:last-child { page-break-after: avoid; }
+
+    /* ── Header ── */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #d4af37;
+      margin-bottom: 36px;
+    }
+
+    .page-header .brand {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #d4af37;
+    }
+
+    .page-header .page-title {
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 1px;
+    }
+
+    /* ── Section ── */
+    .section { margin-bottom: 36px; }
+
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 14px;
+      padding-left: 12px;
+      border-left: 4px solid #d4af37;
+    }
+
+    p { margin-bottom: 10px; color: #333; }
+
+    /* ── Highlight Box ── */
+    .highlight-box {
+      background: linear-gradient(135deg, #fffbea, #fff9e0);
+      border: 1px solid #d4af37;
+      border-left: 5px solid #d4af37;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
+    }
+
+    .highlight-box p { margin: 0; color: #444; }
+
+    /* ── Feature Cards ── */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .feature-card {
+      background: #f8f9ff;
+      border: 1px solid #e0e4f0;
+      border-radius: 10px;
+      padding: 18px;
+    }
+
+    .feature-card .icon {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .feature-card h4 {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 6px;
+    }
+
+    .feature-card p {
+      font-size: 12px;
+      color: #555;
+      margin: 0;
+    }
+
+    /* ── Tech Table ── */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 12.5px;
+    }
+
+    thead tr {
+      background: #1a1a2e;
+      color: #f5d060;
+    }
+
+    thead th {
+      padding: 11px 16px;
+      text-align: left;
+      font-weight: 600;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    tbody tr:nth-child(even) { background: #f5f7ff; }
+    tbody tr:hover { background: #eef1ff; }
+
+    tbody td {
+      padding: 10px 16px;
+      border-bottom: 1px solid #e8eaf0;
+      color: #333;
+    }
+
+    tbody td:first-child { font-weight: 600; color: #1a1a2e; }
+
+    /* ── Badge ── */
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .badge-green  { background: #d4f4e2; color: #1a7a45; }
+    .badge-blue   { background: #dbeafe; color: #1e40af; }
+    .badge-gold   { background: #fef3c7; color: #92400e; }
+    .badge-purple { background: #ede9fe; color: #5b21b6; }
+
+    /* ── URL Cards ── */
+    .url-card {
+      background: #1a1a2e;
+      color: #f0f0f0;
+      border-radius: 10px;
+      padding: 18px 22px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .url-card .url-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #d4af37;
+      margin-bottom: 4px;
+    }
+
+    .url-card .url-value {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #7dd3fc;
+    }
+
+    .url-card .url-badge {
+      background: #d4af37;
+      color: #1a1a2e;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    /* ── Status Row ── */
+    .status-list { list-style: none; }
+
+    .status-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 12.5px;
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot-green  { background: #22c55e; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-blue   { background: #3b82f6; }
+
+    /* ── Security items ── */
+    .security-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+
+    .security-item {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .security-item .si-icon { font-size: 20px; margin-bottom: 6px; }
+    .security-item .si-title { font-size: 12px; font-weight: 700; color: #166534; }
+    .security-item .si-desc  { font-size: 11px; color: #555; margin-top: 4px; }
+
+    /* ── Arch Diagram ── */
+    .arch-box {
+      background: #f8f9ff;
+      border: 1px solid #e0e4f0;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #1a1a2e;
+      line-height: 2;
+    }
+
+    .arch-layer {
+      display: inline-block;
+      padding: 8px 24px;
+      border-radius: 8px;
+      font-weight: 700;
+      margin: 4px;
+    }
+
+    .layer-user    { background: #dbeafe; color: #1e40af; }
+    .layer-nginx   { background: #fef3c7; color: #92400e; }
+    .layer-app     { background: #d4f4e2; color: #1a7a45; }
+    .layer-db      { background: #ede9fe; color: #5b21b6; }
+    .arch-arrow    { color: #888; font-size: 18px; display: block; margin: 2px 0; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #e0e0e0;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #aaa;
+    }
+
+    /* ── Print ── */
+    @media print {
+      body { font-size: 12px; }
+      .cover { height: 100vh; }
+      .page { padding: 45px 55px; }
+      @page { margin: 0; size: A4; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════ COVER PAGE ═══════════════════════════ -->
+<div class="cover">
+  <div class="logo-box">M</div>
+  <h1>Al-Merak Portal</h1>
+  <h2>Confirmation &amp; Approval System</h2>
+  <p style="color:#a0a0b0; font-size:13px; max-width:480px; line-height:1.8;">
+    A centralized web platform for managing proposal submissions, multi-level approvals, and real-time team collaboration across companies.
+  </p>
+
+  <div class="meta-grid">
+    <div class="meta-item">
+      <div class="label">Report Date</div>
+      <div class="value">August 19, 2026</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Prepared For</div>
+      <div class="value">Chief Executive Officer</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Project Status</div>
+      <div class="value">&#10003; Live &amp; Deployed</div>
+    </div>
+    <div class="meta-item">
+      <div class="label">Environment</div>
+      <div class="value">Production (VPS)</div>
+    </div>
+  </div>
+
+  <p class="confidential">Confidential &mdash; Internal Use Only</p>
+</div>
+
+<!-- ═══════════════════════════ PAGE 1: OVERVIEW ═══════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span class="brand">Al-Merak Portal</span>
+    <span class="page-title">Project Overview &amp; Executive Summary</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Executive Summary</div>
+    <div class="highlight-box">
+      <p>
+        The <strong>Al-Merak Confirmation &amp; Approval Portal</strong> is a fully operational, cloud-deployed web application designed to streamline the internal proposal submission and approval workflow. The system has been developed, tested locally, and successfully deployed to a production VPS server under the live domain <strong>confirmation.qomunix.com</strong>. It is now accessible 24/7 with SSL encryption and automated database management.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What Is This System?</div>
+    <p>
+      The portal replaces manual, email-based approval processes with a structured digital workflow. It enables organizations to manage proposals end-to-end — from submission by a company representative to review and decision-making by designated managers and administrators — all within a single, secure web interface.
+    </p>
+    <p>
+      The platform supports multiple companies, multiple user roles, email notifications, activity tracking, and a full administrative dashboard, making it suitable for organizations that require traceable, auditable approval processes.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Business Problem Solved</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Before (Manual Process)</th>
+          <th>After (Al-Merak Portal)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Proposals sent via email — easy to lose</td>
+          <td>Centralized submission with status tracking</td>
+        </tr>
+        <tr>
+          <td>No clear approval chain visibility</td>
+          <td>Multi-level review with full audit trail</td>
+        </tr>
+        <tr>
+          <td>Manual follow-ups for decision status</td>
+          <td>Automated email notifications at each stage</td>
+        </tr>
+        <tr>
+          <td>No record of who approved what and when</td>
+          <td>Complete activity log with timestamps</td>
+        </tr>
+        <tr>
+          <td>Separate logins / no role management</td>
+          <td>Role-based access (Admin, Manager, Company User)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>Al-Merak Confirmation &amp; Approval Portal — Deployment Report 2026</span>
+    <span>Page 1</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PAGE 2: FEATURES ═══════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span class="brand">Al-Merak Portal</span>
+    <span class="page-title">Core Features &amp; Modules</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Key Features</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">&#128101;</div>
+        <h4>Role-Based Access Control</h4>
+        <p>Three user roles — Super Admin, Manager, and Company User — each with distinct permissions and views to maintain data integrity and access security.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128203;</div>
+        <h4>Proposal Management</h4>
+        <p>Company users submit proposals with detailed information. Proposals progress through defined stages: Pending → Under Review → Approved / Rejected.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#9989;</div>
+        <h4>Multi-Level Approval Workflow</h4>
+        <p>Managers review proposals via secure tokenized links sent by email. Decisions are recorded with comments and timestamps for full traceability.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128276;</div>
+        <h4>Automated Email Notifications</h4>
+        <p>The system sends automated emails at key workflow stages — proposal submission, review requests, and final decisions — via Hostinger SMTP.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#127970;</div>
+        <h4>Multi-Company Support</h4>
+        <p>The platform supports multiple registered companies, each with their own users, proposals, and isolated data. Companies can be invited via email.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128202;</div>
+        <h4>Activity Log &amp; Audit Trail</h4>
+        <p>Every action — logins, submissions, approvals, rejections — is recorded with the acting user and timestamp, providing a complete audit trail.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128274;</div>
+        <h4>JWT Authentication</h4>
+        <p>Secure token-based authentication with access and refresh tokens. Sessions expire automatically and tokens are blacklisted on logout.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">&#128187;</div>
+        <h4>Admin Dashboard</h4>
+        <p>Super Admins have access to a comprehensive dashboard showing system-wide statistics, user management, company oversight, and full proposal history.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">User Roles Summary</div>
+    <table>
+      <thead>
+        <tr><th>Role</th><th>Capabilities</th><th>Access Level</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Super Admin</td>
+          <td>Full system access — manage users, companies, proposals, view all activity logs</td>
+          <td><span class="badge badge-purple">Full Access</span></td>
+        </tr>
+        <tr>
+          <td>Manager</td>
+          <td>Review &amp; approve/reject proposals assigned to them via email token links</td>
+          <td><span class="badge badge-blue">Review Access</span></td>
+        </tr>
+        <tr>
+          <td>Company User</td>
+          <td>Submit proposals, track status of their own submissions</td>
+          <td><span class="badge badge-green">Limited Access</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>Al-Merak Confirmation &amp; Approval Portal — Deployment Report 2026</span>
+    <span>Page 2</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PAGE 3: TECH STACK ═══════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span class="brand">Al-Merak Portal</span>
+    <span class="page-title">Technical Architecture &amp; Stack</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">System Architecture</div>
+    <div class="arch-box">
+      <span class="arch-layer layer-user">&#127760; User / Browser</span>
+      <span class="arch-arrow">&#8595; HTTPS</span>
+      <span class="arch-layer layer-nginx">Nginx Reverse Proxy (SSL / Load Balancer)</span>
+      <span class="arch-arrow">&#8595;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8595;</span>
+      <span class="arch-layer layer-app">Next.js Frontend</span>
+      &nbsp;&nbsp;&nbsp;&nbsp;
+      <span class="arch-layer layer-app">Django REST API</span>
+      <span class="arch-arrow">&#8595;</span>
+      <span class="arch-layer layer-db">PostgreSQL Database</span>
+      <br/><br/>
+      <small style="color:#888;">All services run inside Docker containers on a Hostinger VPS</small>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Technology Stack</div>
+    <table>
+      <thead>
+        <tr><th>Layer</th><th>Technology</th><th>Version</th><th>Purpose</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Frontend</td>
+          <td>Next.js (React)</td>
+          <td>14.x</td>
+          <td>Server-side rendered UI with TypeScript &amp; Tailwind CSS</td>
+        </tr>
+        <tr>
+          <td>Backend</td>
+          <td>Django REST Framework</td>
+          <td>6.1 / 3.18</td>
+          <td>RESTful API, business logic, authentication</td>
+        </tr>
+        <tr>
+          <td>Database</td>
+          <td>PostgreSQL</td>
+          <td>16</td>
+          <td>Primary relational data store</td>
+        </tr>
+        <tr>
+          <td>Authentication</td>
+          <td>djangorestframework-simplejwt</td>
+          <td>5.5.1</td>
+          <td>JWT access &amp; refresh tokens with blacklist support</td>
+        </tr>
+        <tr>
+          <td>Web Server</td>
+          <td>Nginx</td>
+          <td>1.27</td>
+          <td>Reverse proxy, SSL termination, static files</td>
+        </tr>
+        <tr>
+          <td>App Server</td>
+          <td>Gunicorn</td>
+          <td>22.x</td>
+          <td>Production WSGI server for Django</td>
+        </tr>
+        <tr>
+          <td>Containerization</td>
+          <td>Docker &amp; Docker Compose</td>
+          <td>Latest</td>
+          <td>Isolated service containers, reproducible deployment</td>
+        </tr>
+        <tr>
+          <td>SSL / HTTPS</td>
+          <td>Let's Encrypt (Certbot)</td>
+          <td>&mdash;</td>
+          <td>Free automated SSL certificates, auto-renewal</td>
+        </tr>
+        <tr>
+          <td>Email</td>
+          <td>Hostinger SMTP</td>
+          <td>&mdash;</td>
+          <td>Transactional emails for notifications &amp; invites</td>
+        </tr>
+        <tr>
+          <td>Infrastructure</td>
+          <td>Hostinger VPS (Ubuntu)</td>
+          <td>&mdash;</td>
+          <td>Cloud virtual private server hosting</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>Al-Merak Confirmation &amp; Approval Portal — Deployment Report 2026</span>
+    <span>Page 3</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PAGE 4: DEPLOYMENT ═══════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span class="brand">Al-Merak Portal</span>
+    <span class="page-title">Deployment &amp; Infrastructure</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Live Access URLs</div>
+    <div class="url-card">
+      <div>
+        <div class="url-label">Frontend Application</div>
+        <div class="url-value">https://confirmation.qomunix.com</div>
+      </div>
+      <span class="url-badge">LIVE</span>
+    </div>
+    <div class="url-card">
+      <div>
+        <div class="url-label">Backend REST API</div>
+        <div class="url-value">https://api.confirmation.qomunix.com/api/</div>
+      </div>
+      <span class="url-badge">LIVE</span>
+    </div>
+    <div class="url-card">
+      <div>
+        <div class="url-label">Admin Dashboard</div>
+        <div class="url-value">https://api.confirmation.qomunix.com/admin/</div>
+      </div>
+      <span class="url-badge">LIVE</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Infrastructure Details</div>
+    <table>
+      <thead>
+        <tr><th>Component</th><th>Details</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Server Provider</td><td>Hostinger VPS</td></tr>
+        <tr><td>Server IP</td><td>187.52.121.121</td></tr>
+        <tr><td>Operating System</td><td>Ubuntu 24.04 LTS</td></tr>
+        <tr><td>Frontend Domain</td><td>confirmation.qomunix.com</td></tr>
+        <tr><td>Backend Domain</td><td>api.confirmation.qomunix.com</td></tr>
+        <tr><td>SSL Certificate</td><td>Let's Encrypt — Valid until November 17, 2026 (auto-renews)</td></tr>
+        <tr><td>Database</td><td>PostgreSQL 16 — Containerized with persistent volume</td></tr>
+        <tr><td>Deployment Method</td><td>Docker Compose (4 containers: db, backend, frontend, nginx)</td></tr>
+        <tr><td>Email Provider</td><td>Hostinger SMTP (info@e-numerak.com)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Deployment Architecture — Docker Services</div>
+    <table>
+      <thead>
+        <tr><th>Container</th><th>Image</th><th>Role</th><th>Status</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>nginx</td>
+          <td>nginx:1.27-alpine</td>
+          <td>Reverse proxy, SSL, routing</td>
+          <td><span class="badge badge-green">Running</span></td>
+        </tr>
+        <tr>
+          <td>backend</td>
+          <td>Custom (Python 3.12)</td>
+          <td>Django REST API + Gunicorn</td>
+          <td><span class="badge badge-green">Running</span></td>
+        </tr>
+        <tr>
+          <td>frontend</td>
+          <td>Custom (Node 20)</td>
+          <td>Next.js standalone server</td>
+          <td><span class="badge badge-green">Running</span></td>
+        </tr>
+        <tr>
+          <td>db</td>
+          <td>postgres:16-alpine</td>
+          <td>PostgreSQL database</td>
+          <td><span class="badge badge-green">Healthy</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">
+    <span>Al-Merak Confirmation &amp; Approval Portal — Deployment Report 2026</span>
+    <span>Page 4</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PAGE 5: SECURITY & TESTING ═══════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span class="brand">Al-Merak Portal</span>
+    <span class="page-title">Security &amp; Testing</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Security Measures Implemented</div>
+    <div class="security-grid">
+      <div class="security-item">
+        <div class="si-icon">&#128274;</div>
+        <div class="si-title">HTTPS / SSL</div>
+        <div class="si-desc">All traffic encrypted via TLS 1.2/1.3 with Let's Encrypt certificates</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#128273;</div>
+        <div class="si-title">JWT Auth</div>
+        <div class="si-desc">Short-lived access tokens + refresh rotation with token blacklisting on logout</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#128736;</div>
+        <div class="si-title">CORS Policy</div>
+        <div class="si-desc">API only accepts requests from the authorized frontend domain</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#128100;</div>
+        <div class="si-title">Role Permissions</div>
+        <div class="si-desc">Every API endpoint enforces role-based access — no privilege escalation possible</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#128260;</div>
+        <div class="si-title">Review Tokens</div>
+        <div class="si-desc">Tokenized proposal review links expire after 14 days — single-purpose, time-limited</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#128203;</div>
+        <div class="si-title">Audit Trail</div>
+        <div class="si-desc">All actions are logged with user identity and timestamp — full accountability</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#128683;</div>
+        <div class="si-title">Non-Root Container</div>
+        <div class="si-desc">Production containers run as non-root system users to limit attack surface</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#128290;</div>
+        <div class="si-title">Env Isolation</div>
+        <div class="si-desc">All secrets stored in server-side environment variables — never in source code</div>
+      </div>
+      <div class="security-item">
+        <div class="si-icon">&#9989;</div>
+        <div class="si-title">Password Validation</div>
+        <div class="si-desc">Django's built-in validators enforce strong password policies for all accounts</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Testing &amp; Verification Status</div>
+    <ul class="status-list">
+      <li><span class="status-dot dot-green"></span>Local development environment — fully tested on localhost</li>
+      <li><span class="status-dot dot-green"></span>User registration, login, and JWT token flow — verified</li>
+      <li><span class="status-dot dot-green"></span>Proposal submission workflow — end-to-end tested</li>
+      <li><span class="status-dot dot-green"></span>Email notification delivery — configured and operational</li>
+      <li><span class="status-dot dot-green"></span>Multi-company data isolation — confirmed working</li>
+      <li><span class="status-dot dot-green"></span>Production Docker build — all 4 containers healthy</li>
+      <li><span class="status-dot dot-green"></span>HTTPS SSL on both domains — active and verified</li>
+      <li><span class="status-dot dot-green"></span>Database migrations — applied successfully on production</li>
+      <li><span class="status-dot dot-green"></span>Static files serving — configured via Nginx</li>
+      <li><span class="status-dot dot-green"></span>Django Admin panel — accessible at api subdomain</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <span>Al-Merak Confirmation &amp; Approval Portal — Deployment Report 2026</span>
+    <span>Page 5</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════ PAGE 6: NEXT STEPS ═══════════════════════════ -->
+<div class="page">
+  <div class="page-header">
+    <span class="brand">Al-Merak Portal</span>
+    <span class="page-title">Recommendations &amp; Next Steps</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Recommended Next Steps</div>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Action</th><th>Priority</th><th>Reason</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Set up automated database backups</td>
+          <td><span class="badge badge-purple">High</span></td>
+          <td>Prevent data loss in case of server failure</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Integrate Sentry error monitoring</td>
+          <td><span class="badge badge-blue">Medium</span></td>
+          <td>Real-time error alerts and performance tracking</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Set up CI/CD pipeline (GitHub Actions)</td>
+          <td><span class="badge badge-blue">Medium</span></td>
+          <td>Automate deployments on every code push</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Add server monitoring (Uptime Robot / Grafana)</td>
+          <td><span class="badge badge-blue">Medium</span></td>
+          <td>24/7 uptime alerts and performance visibility</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Upgrade VPS plan as user base grows</td>
+          <td><span class="badge badge-gold">Low</span></td>
+          <td>Current VPS is sufficient for initial load; scale as needed</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Mobile-responsive UI enhancements</td>
+          <td><span class="badge badge-gold">Low</span></td>
+          <td>Improve experience on mobile devices</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Project Delivery Summary</div>
+    <div class="highlight-box">
+      <p>
+        The <strong>Al-Merak Confirmation &amp; Approval Portal</strong> has been successfully designed, developed, tested, and deployed to a production cloud environment. The system is fully operational, secured with SSL encryption, running on isolated Docker containers, and accessible via custom domains. All core business requirements — multi-company support, role-based access, proposal workflow, email notifications, and audit logging — have been implemented and verified.
+      </p>
+      <br/>
+      <p>
+        The platform is ready for onboarding of real users and companies. Admin access has been configured and the system is available at <strong>https://confirmation.qomunix.com</strong>.
+      </p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Admin Credentials</div>
+    <table>
+      <thead>
+        <tr><th>Field</th><th>Value</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Admin Panel URL</td><td>https://api.confirmation.qomunix.com/admin/</td></tr>
+        <tr><td>Email</td><td>admin@merak.com</td></tr>
+        <tr><td>Password</td><td>Shared separately (secure channel)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div style="margin-top: 50px; text-align: center; padding: 30px; background: linear-gradient(135deg, #0f0f1a, #1a1a2e); border-radius: 12px; color: #fff;">
+    <p style="color: #d4af37; font-size: 14px; font-weight: 700; margin-bottom: 8px;">Prepared by the Development Team</p>
+    <p style="color: #aaa; font-size: 12px;">Al-Merak Technology &mdash; August 2026</p>
+    <p style="color: #666; font-size: 11px; margin-top: 12px;">This document is confidential and intended solely for the use of Al-Merak management.</p>
+  </div>
+
+  <div class="footer">
+    <span>Al-Merak Confirmation &amp; Approval Portal — Deployment Report 2026</span>
+    <span>Page 6</span>
+  </div>
+</div>
+
+</body>
+</html>
